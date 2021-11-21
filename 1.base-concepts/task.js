@@ -19,22 +19,32 @@ solveEquation(1, 1, 1);
 
 
 
-function calculateTotalMortgage(percent, contribution, amount, date = new Date(2022, 12, 1)) {
+function calculateTotalMortgage(percent, contribution, amount, date = new Date()) {
   let S = amount - contribution;
-  let P = 1 / 12 * percent / 100;
-  let n = date;
+  let P = percent / 100 / 12;
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+  let diffferenceInYears = date.getFullYear() - currentYear;
+  let n = diffferenceInYears * 12 - currentMonth + date;
   let monthlyPayment = S * (P + (P / (((1 + P) ** n) - 1)));
   let totalAmount = monthlyPayment * n;
-  for (let i = 0; i < arguments.length; i++) {
-    if (typeof arguments[i] === "string") {
-      +arguments[i];
-    }
-    if (typeof arguments[i] !== "number") {
-      return `Параметр ${arguments[i]} содержит неправильное значение ${arguments[i]}`;
+    let parsedPercent = parseInt(percent);
+    let parsedContribution = parseInt(contribution);
+    let parsedAmount = parseInt(amount);
+    let parsedDate = parseInt(date);
+    if (Number.isNaN(parsedPercent)) {
+      return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
+    } else if (Number.isNaN(parsedContribution)) {
+        return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+    } else if (Number.isNaN(parsedAmount)) {
+        return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+    } else if (Number.isNaN(parsedDate)) {
+        return `Параметр "Срок" содержит неправильное значение "${date}"`;
     } else {
       return totalAmount.toFixed(2);
     }
   }
-}
+  
 
-calculateTotalMortgage(10, 1000, 50000, 12);
+  
+
