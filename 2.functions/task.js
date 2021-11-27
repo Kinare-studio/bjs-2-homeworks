@@ -29,12 +29,12 @@ function worker(arr) {
   return sum;
 }
 
-
 function makeWork(arrOfArr, func) {
 let max = 0;
 for (let i = 0; i < arrOfArr.length; i++) {
-  if (func(arrOfArr[i]) > max) {
-    max = func(arrOfArr[i]);
+  const result = func(arrOfArr[i]);
+  if (result > max) {
+    max = result;
   }
 }
 return max;
