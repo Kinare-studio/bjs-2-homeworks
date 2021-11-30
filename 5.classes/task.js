@@ -91,7 +91,7 @@ class Library {
     });
     if (foundBook !== undefined) {
       let indexOfFoundBook = this.books.indexOf(foundBook);
-      return this.books.splice(indexOfFoundBook, 1);
+      return this.books.splice(indexOfFoundBook, 1)[0];
     } else {
       return null;
     }
