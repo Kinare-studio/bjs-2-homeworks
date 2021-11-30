@@ -17,7 +17,7 @@ Student.prototype.addMark = function(...[mark]) {
 
 Student.prototype.addMarks = function(...mark) {
   if (typeof this.marks === "object") {
-    return this.marks.push(mark);
+    return this.marks.push(...mark);
   } else {
     return this.marks = mark;
   }
