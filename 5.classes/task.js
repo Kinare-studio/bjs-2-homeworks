@@ -4,16 +4,16 @@ class PrintEditionItem {
     this.name = name;
     this.releaseDate = releaseDate;
     this.pagesCount = pagesCount;
-    this._state = 100;
+    this.state = 100;
     this.type = null;
   }
   set state(value) {
     if (value < 0) {
-      return 0;
+      this._state = 0;
     } else if (value > 100) {
-      return 100;
+      this._state = 100;
     } else {
-      return this._state;
+      this._state = value;
     }
   }
   get state() {
@@ -63,3 +63,37 @@ class DetectiveBook extends Book {
 
 
 //Задача 2
+
+class Library {
+  constructor(name) {
+    this.name = name;
+    this.books = [];
+  }
+  addBook(book) {
+    if (book.state > 30) {
+      return this.books.push(book);
+    }
+  }
+  findBookBy(type, value) {
+    let result = this.books.find(function(book) {
+      return book[type] === value;
+    });
+    if (result !== undefined) {
+      return result;
+    } else {
+      return null;
+    }
+  }
+
+  giveBookByName(bookName) {
+    let foundBook = this.books.find(function(book) {
+      return book.name === bookName;
+    });
+    if (foundBook !== undefined) {
+      let indexOfFoundBook = this.books.indexOf(foundBook);
+      return this.books.splice(indexOfFoundBook, 1);
+    } else {
+      return null;
+    }
+  }
+}
