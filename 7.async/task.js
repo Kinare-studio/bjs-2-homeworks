@@ -25,16 +25,17 @@ class AlarmClock {
   
   
     getCurrentFormattedTime() {
-      let date = new Date().toLocaleDateString("ru-Ru", {
+      let date = new Date().toLocaleTimeString("ru-Ru", {
         hour: "2-digit",
         minute: "2-digit",
       });
-     return date.slice(12, 17);
+      return date;
     }
   
     start() {
+      checkClock = checkClock.bind(this);
       function checkClock(element) {
-        if (phoneAlarm.getCurrentFormattedTime() === element.time) {
+        if (this.alarmCollection.getCurrentFormattedTime() === element.time) {
           element.callback();
         }
       }
@@ -60,5 +61,3 @@ class AlarmClock {
       this.alarmCollection = [];
     }
   }
-
-  let phoneAlarm = new AlarmClock();
